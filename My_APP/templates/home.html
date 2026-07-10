@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - All Tasks</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="logo">TaskFlow</a>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}" class="active">Home</a></li>
+            <li><a href="{% url 'create_task' %}">+ Create Task</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="glass-card">
+            <h1>Display All Tasks</h1>
+
+            {% if tasks %}
+                <div class="task-list">
+                    {% for task in tasks %}
+                        <div class="task-card {% if task.completed %}completed{% else %}pending{% endif %}">
+                            <h3>{{ task.title }}</h3>
+                            <p>{{ task.description }}</p>
+
+                            {% if task.completed %}
+                                <span class="status completed">Completed</span>
+                            {% else %}
+                                <span class="status pending">Pending</span>
+                            {% endif %}
+
+                            <div class="btn-group">
+                                <a href="{% url 'edit_task' task.id %}" class="btn btn-edit">Edit</a>
+                                <a href="{% url 'delete_task' task.id %}" class="btn btn-delete">Delete</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <h2>No tasks yet!</h2>
+                    <p>Create your first task to get started.</p>
+                    <a href="{% url 'create_task' %}" class="btn btn-create">+ Create Task</a>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
+     

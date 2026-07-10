@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Task - TaskFlow</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="logo">TaskFlow</a>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'create_task' %}" class="active">Create</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="glass-card">
+            <h1>Create Task</h1>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                    <div class="form-errors">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                    {{ form.title.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                    {{ form.description.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        {{ form.completed }}
+                        {{ form.completed.label_tag }}
+                    </label>
+                    {{ form.completed.errors }}
+                </div>
+
+                <button type="submit" class="btn btn-create">Create Task</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
