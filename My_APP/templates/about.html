@@ -1,36 +1,24 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - TaskFlow</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <nav class="navbar">
-        <a href="{% url 'home' %}" class="logo">TaskFlow</a>
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-            <li><a href="{% url 'about' %}" class="active">About</a></li>
-            <li><a href="{% url 'create_task' %}">Create</a></li>
-        </ul>
-    </nav>
+{% extends 'base.html' %}
 
-    <main class="container">
-        <section class="glass-card about-content">
-            <h1>About TaskFlow</h1>
-            <p>TaskFlow helps you organize your tasks with a clean, colorful interface and simple workflow.</p>
-            <h2>Why TaskFlow?</h2>
-            <p>Track completed tasks, keep pending items visible, and manage your schedule with ease.</p>
-            <ul>
-                <li>Modern color palette for better readability</li>
-                <li>Fast task creation and editing</li>
-                <li>Responsive layout for phones and tablets</li>
-            </ul>
-            <p>Built with Django and styled with a crisp color system to make every section stand out.</p>
-        </section>
-    </main>
-</body>
-</html>
+{% block title %}About | Olive Chimeziri Portfolio{% endblock %}
+
+{% block content %}
+<section class="section-block">
+    <h1>About Me</h1>
+    <p class="lead">I am a data engineer who enjoys building robust systems while keeping creativity at the center of everything I do.</p>
+    <div class="cards-grid">
+        <div class="card">
+            <h3>Data Engineering</h3>
+            <p>I work with data pipelines, reliable architecture, and insightful reporting.</p>
+        </div>
+        <div class="card">
+            <h3>Music</h3>
+            <p>I’m passionate about lounge and corporate singing, piano performance, and artistic expression.</p>
+        </div>
+        <div class="card">
+            <h3>Languages</h3>
+            <p>I am multilingual and enjoy connecting across cultures and communities.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

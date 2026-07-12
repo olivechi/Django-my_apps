@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Skills | Olive Chimeziri Portfolio{% endblock %}
+
+{% block content %}
+<section class="section-block">
+    <h1>Skills & Expertise</h1>
+    <p class="lead">Here are the areas I bring to life through work and creativity.</p>
+    <div class="cards-grid">
+        {% for skill in skills %}
+            <div class="card">
+                <h3>{{ skill.name }}</h3>
+                <p>{{ skill.description }}</p>
+            </div>
+        {% empty %}
+            <p>No skills available yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

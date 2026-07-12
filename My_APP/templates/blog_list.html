@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog | Olive Chimeziri Portfolio{% endblock %}
+
+{% block content %}
+<section class="section-block">
+    <div class="section-title-row">
+        <h1>Blog</h1>
+        <a class="btn btn-primary" href="{% url 'blog_create' %}">Create Post</a>
+    </div>
+    <div class="cards-grid">
+        {% for post in posts %}
+            <div class="card">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content }}</p>
+                <div class="card-actions">
+                    <a class="btn btn-secondary" href="{% url 'blog_update' post.pk %}">Edit</a>
+                    <a class="btn btn-delete" href="{% url 'blog_delete' post.pk %}">Delete</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No blog posts yet. Create your first entry.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

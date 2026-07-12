@@ -1,56 +1,61 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskFlow - All Tasks</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <nav class="navbar">
-        <a href="{% url 'home' %}" class="logo">TaskFlow</a>
-        <ul class="nav-links">
-            <li><a href="{% url 'home' %}" class="active">Home</a></li>
-            <li><a href="{% url 'create_task' %}">+ Create Task</a></li>
-            <li><a href="{% url 'about' %}">About</a></li>
-            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+{% extends 'base.html' %}
+
+{% block title %}Home | Olive Chimeziri Portfolio{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">DATA ENGINEER • MUSICIAN • MULTILINGUAL</p>
+        <h1>I build data systems and tell stories through music.</h1>
+        <p class="lead">I’m <span class="name-accent">Olive Chimeziri</span>, a data engineer with a passion for technology, lounge and corporate singing, piano, and multilingual communication.</p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="{% url 'contact' %}">Let’s Connect</a>
+            <a class="btn btn-secondary" href="{% url 'skills' %}">View Skills</a>
+        </div>
+    </div>
+    <div class="hero-card">
+        <h3>Featured Focus</h3>
+        <ul>
+            <li>Data pipelines and analytics</li>
+            <li>Creative songwriting and performance</li>
+            <li>Communication across cultures</li>
         </ul>
-    </nav>
+    </div>
+</section>
 
-    <main class="container">
-        <section class="glass-card">
-            <h1>Display All Tasks</h1>
+<section class="section-block">
+    <div class="section-title-row">
+        <h2>Core Skills</h2>
+        <a href="{% url 'skills' %}">See all</a>
+    </div>
+    <div class="cards-grid">
+        {% for skill in skills %}
+            <div class="card">
+                <h3>{{ skill.name }}</h3>
+                <p>{{ skill.description }}</p>
+            </div>
+        {% empty %}
+            <p>No skills added yet.</p>
+        {% endfor %}
+    </div>
+</section>
 
-            {% if tasks %}
-                <div class="task-list">
-                    {% for task in tasks %}
-                        <div class="task-card {% if task.completed %}completed{% else %}pending{% endif %}">
-                            <h3>{{ task.title }}</h3>
-                            <p>{{ task.description }}</p>
-
-                            {% if task.completed %}
-                                <span class="status completed">Completed</span>
-                            {% else %}
-                                <span class="status pending">Pending</span>
-                            {% endif %}
-
-                            <div class="btn-group">
-                                <a href="{% url 'edit_task' task.id %}" class="btn btn-edit">Edit</a>
-                                <a href="{% url 'delete_task' task.id %}" class="btn btn-delete">Delete</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div class="empty-state">
-                    <h2>No tasks yet!</h2>
-                    <p>Create your first task to get started.</p>
-                    <a href="{% url 'create_task' %}" class="btn btn-create">+ Create Task</a>
-                </div>
-            {% endif %}
-        </section>
-    </main>
-</body>
-</html>
+<section class="section-block">
+    <div class="section-title-row">
+        <h2>Latest Blog Posts</h2>
+        <a href="{% url 'blog_list' %}">View all</a>
+    </div>
+    <div class="cards-grid">
+        {% for post in posts %}
+            <div class="card">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content|truncatewords:20 }}</p>
+                <small>{{ post.created_at|date:"M d, Y" }}</small>
+            </div>
+        {% empty %}
+            <p>No blog posts yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
      
